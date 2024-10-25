@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class CustomListTest {
@@ -50,6 +51,17 @@ public class CustomListTest {
         list.deleteCity(city);
         assertFalse(list.hasCity(city));
         assertThrows(IllegalArgumentException.class, ()-> list.deleteCity(city));
+    }
+
+    @Test
+    void testCityCount(){
+        CustomList list = mockCityList();
+        City city = new City("Red Deer", "Alberta");
+        assertEquals(0, list.countCities());
+        list.addCity(city);
+        assertEquals(1, list.countCities());
+        list.deleteCity(city);
+        assertEquals(0, list.countCities());
     }
 
 }
